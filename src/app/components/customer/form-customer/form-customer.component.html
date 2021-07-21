@@ -1,0 +1,36 @@
+<mat-card class="example-card">
+   <form class="example-form" (ngSubmit)="onGuardar(myForm)" #myForm="ngForm">
+      <mat-card-header>
+         <mat-card-title>Customer</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+         <mat-grid-list cols="10" rowHeight="80px">
+            <input type="hidden" name="id" [(ngModel)]="customer.id">
+            <mat-grid-tile colspan="5">
+               <mat-form-field class="example-98-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Customer Name" name="name" autocomplete="off"
+                     [(ngModel)]="customer.name"
+                     minlength="5" required>
+               </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5">
+               <mat-form-field class="example-98-width">
+                  <mat-label>City</mat-label>
+                  <input matInput placeholder="Customer City" name="city" [(ngModel)]="customer.city" required>
+               </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="10">
+               <mat-form-field class="example-full-width">
+                  <mat-label>Order</mat-label>
+                  <input matInput placeholder="Customer Order" name="order" [(ngModel)]="customer.order" required>
+               </mat-form-field>
+            </mat-grid-tile>
+         </mat-grid-list>
+      </mat-card-content>
+      <mat-card-actions class="card_actions">
+         <button mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="sendForm()"> Save </button>
+         <button mat-button (click)="cancelForm()">Cancel</button>
+      </mat-card-actions>
+   </form>
+</mat-card>

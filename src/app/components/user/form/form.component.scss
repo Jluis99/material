@@ -1,0 +1,39 @@
+.width-90 {
+   width: 90%;
+}
+
+.error {
+   font-size: 12px;
+   padding-inline-start: 15px !important;
+}
+
+mat-grid-tile-footer.without_background {
+   background: none !important;
+   color: rgb(204, 92, 92);
+   margin-left: 7px;
+}
+
+.example-section {
+   align-content: center;
+   align-items: center;
+   height: 60px;
+}
+
+.display-flex {
+   display: flex;
+}
+
+.example-margin {
+   margin: 0 10px;
+}
+
+.text-inside-grid {
+   position: absolute;
+   left: 14px;
+   width: 100%;
+}
+
+.text-inside-grid-right {
+   text-align: end;
+   width: 100%;
+}

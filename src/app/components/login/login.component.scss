@@ -1,0 +1,14 @@
+.example-full-width {
+   width: 100%;
+}
+
+mat-card {
+   max-width: 600px;
+   margin: 2em auto;
+   text-align: center;
+}
+
+.card__accions {
+   text-align: end !important;
+   margin: 0px 5px 0 0 !important;
+}

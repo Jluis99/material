@@ -1,0 +1,141 @@
+<mat-card class="example-card">
+   <mat-card-header>
+      <mat-card-title>User</mat-card-title>
+   </mat-card-header>
+   <mat-card-content>
+      <form [formGroup]="userForm">
+         <mat-grid-list cols="12" rowHeight="100px">
+            <mat-grid-tile rowspan="1" colspan="4">
+               <mat-form-field class="width-90">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="User Name" formControlName="name" autocomplete="false">
+               </mat-form-field>
+               <mat-grid-tile-footer class="without_background" *ngIf="(registerFormControl.name.touched || submitted)">
+                  <ul class="error">
+                     <li *ngIf="registerFormControl.name.errors?.required">
+                        {{ validForm('required', 'name') }}
+                     </li>
+                     <li *ngIf="registerFormControl.name.errors?.maxlength">
+                        {{
+                        validForm('maxLength', 'name', {
+                        'maxLength': registerFormControl.name.errors?.maxlength.requiredLength,
+                        'actualLength': registerFormControl.name.errors?.maxlength.actualLength
+                        })
+                        }}
+                     </li>
+                  </ul>
+               </mat-grid-tile-footer>
+            </mat-grid-tile>
+            <mat-grid-tile rowspan="1" colspan="4">
+               <mat-form-field class="width-90">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput placeholder="User last name" formControlName="lastName" autocomplete="false">
+               </mat-form-field>
+               <mat-grid-tile-footer class="without_background"
+                  *ngIf="(registerFormControl.lastName.touched || submitted)">
+                  <ul class="error">
+                     <li *ngIf="registerFormControl.lastName.errors?.required">
+                        {{ validForm('required', 'last name') }}
+                     </li>
+                     <li *ngIf="registerFormControl.lastName.errors?.maxlength">
+                        {{
+                        validForm('maxLength', 'name', {
+                        'maxLength': registerFormControl.lastName.errors?.maxlength.requiredLength,
+                        'actualLength': registerFormControl.lastName.errors?.maxlength.actualLength
+                        })
+                        }}
+                     </li>
+                  </ul>
+               </mat-grid-tile-footer>
+            </mat-grid-tile>
+            <mat-grid-tile rowspan="1" colspan="4">
+               <mat-form-field class="width-90">
+                  <mat-label>Email</mat-label>
+                  <input matInput placeholder="User email" formControlName="email" autocomplete="false">
+               </mat-form-field>
+               <mat-grid-tile-footer class="without_background"
+                  *ngIf="(registerFormControl.email.touched || submitted)">
+                  <ul class="error">
+                     <li *ngIf="registerFormControl.email.errors?.required">
+                        {{ validForm('required', 'email') }}
+                     </li>
+                     <li *ngIf="registerFormControl.email.errors?.minlength">
+                        {{
+                        validForm('minLength', 'email', {
+                        'minLength': registerFormControl.email.errors?.minlength.requiredLength,
+                        'actualLength': registerFormControl.email.errors?.minlength.actualLength
+                        })
+                        }}
+                     </li>
+                     <li *ngIf="registerFormControl.email.errors?.pattern">
+                        {{ validForm('email', 'email') }}
+                     </li>
+                  </ul>
+               </mat-grid-tile-footer>
+            </mat-grid-tile>
+            <mat-grid-tile rowspan="1" colspan="2">
+               <div class="text-inside-grid">
+                  <label class="example-margin">Status:</label>
+                  <section class="example-section display-flex">
+                     <mat-radio-group>
+                        <mat-radio-button class="example-margin" formControlName="status" ngDefaultControl
+                           [checked]="currentUser.status ? true : false" value="true">Active</mat-radio-button>
+                        <mat-radio-button class="example-margin" formControlName="status" ngDefaultControl
+                           [checked]="currentUser.status ? false : true" value="false">Inactive</mat-radio-button>
+                     </mat-radio-group>
+                  </section>
+               </div>
+            </mat-grid-tile>
+            <mat-grid-tile rowspan="1" colspan="2">
+               <div class="text-inside-grid" style="margin-bottom: 60px;">
+                  <label class="example-margin">Roles</label>
+                  <p formArrayName="roles" *ngFor="let role of rolesFormArray.controls; let i = index">
+                     <mat-checkbox [formControlName]="i">{{roles[i].name}}
+                     </mat-checkbox>
+                  </p>
+               </div>
+               <mat-grid-tile-footer class="without_background" *ngIf="(registerFormControl.roles.errors || submitted)">
+                  <ul class="error">
+                     <li *ngIf="registerFormControl.roles.errors">
+                        At least one role must be selected
+                     </li>
+                  </ul>
+               </mat-grid-tile-footer>
+            </mat-grid-tile>
+            <div formArrayName="adresses">
+               <button mat-button type="button" (click)="addAdresses()">Add Adress</button>
+               <ng-container *ngFor="let adress of adresses.controls; let i = index;">
+                  <mat-grid-tile rowspan="2" colspan="12">
+                     <mat-form-field class="width-90">
+                        <mat-label>Adress {{ i + 1 }}</mat-label>
+                        <input matInput placeholder="User Name" [formControlName]="i" autocomplete="false">
+                     </mat-form-field>
+                     <mat-grid-tile-footer class="without_background" *ngIf="(adress.touched || submitted)">
+                        <ul class="error">
+                           <li *ngIf="adress.errors?.required">
+                              {{ validForm('required', 'name') }}
+                           </li>
+                           <li *ngIf="adress.errors?.minlength">
+                              {{
+                              validForm('minLength', 'email', {
+                              'minLength': adress.errors?.minlength.requiredLength,
+                              'actualLength': adress.errors?.minlength.actualLength
+                              })
+                              }}
+                           </li>
+                        </ul>
+                     </mat-grid-tile-footer>
+                  </mat-grid-tile>
+               </ng-container>
+            </div>
+            <mat-grid-tile rowspan="1" colspan="10">
+               <div class="text-inside-grid-right">
+                  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!userForm.valid"> Save
+                  </button>
+                  <button mat-button (click)="cancelForm()">Cancel</button>
+               </div>
+            </mat-grid-tile>
+         </mat-grid-list>
+      </form>
+   </mat-card-content>
+</mat-card>
